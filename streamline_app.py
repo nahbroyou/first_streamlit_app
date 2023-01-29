@@ -1,5 +1,6 @@
 import streamlit
 import pandas as pd
+import requests
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -18,4 +19,12 @@ fruits_selected = streamlit.multiselect("Pick some fruits:", list (my_fruit_list
 fruits_to_show = my_fruit_list.loc[fruits_selected] #display the table on the page
 streamlit.dataframe(fruits_to_show)
 
-streamlit.text(fruits_selected)
+
+
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
+
+#api key for food site: dRb3cEd8uNU9Mbl8FqyU3g0YJNIDWWiqXSOIDsH4
+# https://api.nal.usda.gov/fdc/v1/foods/search?query=apple&pageSize=2&api_key=dRb3cEd8uNU9Mbl8FqyU3g0YJNIDWWiqXSOIDsH4
+#Account Email: jim@mckeown.us
+#Account ID: 0cd3c7c4-1c25-42be-9c67-d5cf1c49da55
