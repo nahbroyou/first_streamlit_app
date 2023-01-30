@@ -1,6 +1,7 @@
 import streamlit
 import pandas as pd
 import requests
+import snowflake.connector
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -29,10 +30,3 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
-
-#streamlit.text(fruityvice_response.json())
-
-#api key for food site: dRb3cEd8uNU9Mbl8FqyU3g0YJNIDWWiqXSOIDsH4
-# https://api.nal.usda.gov/fdc/v1/foods/search?query=apple&pageSize=2&api_key=dRb3cEd8uNU9Mbl8FqyU3g0YJNIDWWiqXSOIDsH4
-#Account Email: jim@mckeown.us
-#Account ID: 0cd3c7c4-1c25-42be-9c67-d5cf1c49da55
