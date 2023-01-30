@@ -41,16 +41,31 @@ except URLError as e:
 # write your own comment - what does this do?
 #streamlit.dataframe(fruityvice_normalized)
 
-
-#don't run anything past here while we troubleshoot
-streamlit.stop()
-
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-my_data_rows = my_cur.fetchall()
-streamlit.header("The fruit list contains:")
-streamlit.dataframe(my_data_rows)
 
-add_my_fruit = streamlit.text_input ('Add a fruit to the list?')
-streamlit.write('The user entered', add_my_fruit)
+# Allow the end user to add a fruit to the list
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("insert into fruit_load_list values ('"+ new_fruit +"')")
+        return "Thanks for adding " + new fruit
+
+
+add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+if streamlit.button('Add a Fruit to the List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    streamlit.text(back_from_function)
+
+
+
+#don't run anything past here while we troubleshoot
+#streamlit.stop()
+
+#my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
+#my_data_rows = my_cur.fetchall()
+#streamlit.header("The fruit list contains:")
+#streamlit.dataframe(my_data_rows)
+
+#add_my_fruit = streamlit.text_input ('Add a fruit to the list?')
+#streamlit.write('The user entered', add_my_fruit)
