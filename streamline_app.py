@@ -62,10 +62,10 @@ if streamlit.button('Add a Fruit to the List'):
 #don't run anything past here while we troubleshoot
 #streamlit.stop()
 
-#my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-#my_data_rows = my_cur.fetchall()
-#streamlit.header("The fruit list contains:")
-#streamlit.dataframe(my_data_rows)
+my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
+my_data_rows = my_cur.fetchall()
+streamlit.header("The fruit list contains:")
+streamlit.dataframe(my_data_rows)
 
 #add_my_fruit = streamlit.text_input ('Add a fruit to the list?')
 #streamlit.write('The user entered', add_my_fruit)
